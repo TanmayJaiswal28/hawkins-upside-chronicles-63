@@ -1,0 +1,220 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Stranger Things Design System - Hawkins meets the Upside Down */
+
+@layer base {
+  :root {
+    /* Hawkins (Normal World) Colors */
+    --background: 220 26% 7%;  /* Dark blue background */
+    --foreground: 0 0% 95%;    /* Light text */
+
+    --card: 220 26% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 220 26% 10%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 349 91% 24%;     /* Deep red #7a0019 */
+    --primary-foreground: 0 0% 95%;
+
+    --secondary: 220 26% 14%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 220 26% 14%;
+    --muted-foreground: 220 10% 65%;
+
+    --accent: 349 91% 30%;      /* Accent red */
+    --accent-foreground: 0 0% 95%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 26% 18%;
+    --input: 220 26% 14%;
+    --ring: 349 91% 40%;
+
+    --radius: 0.5rem;
+
+    /* Stranger Things specific colors */
+    --hawkins-blue: 220 26% 7%;    /* #0a0f2e equivalent */
+    --upside-down-red: 349 91% 24%; /* #7a0019 equivalent */
+    --neon-glow: 203 100% 50%;      /* Electric blue */
+    --demogorgon-dark: 0 0% 8%;     /* Almost black */
+    --mind-flayer-purple: 270 60% 20%;
+    --eleven-pink: 320 70% 60%;
+    
+    /* Glow effects - Enhanced for authentic Stranger Things look */
+    --red-glow: 0 0 5px hsl(var(--upside-down-red)), 
+                0 0 10px hsl(var(--upside-down-red)), 
+                0 0 20px hsl(var(--upside-down-red)), 
+                0 0 40px hsl(var(--upside-down-red));
+    --blue-glow: 0 0 20px hsl(var(--neon-glow)), 0 0 40px hsl(var(--neon-glow));
+    
+    /* Stranger Things specific neon effects */
+    --stranger-glow: 0 0 5px #ff0000, 
+                     0 0 10px #ff0000, 
+                     0 0 20px #ff0000, 
+                     0 0 40px #ff0000,
+                     0 0 80px #ff0000;
+    --stranger-text-shadow: 2px 2px 0px #8b0000,
+                           0 0 10px #ff0000,
+                           0 0 20px #ff0000,
+                           0 0 40px #ff0000;
+    
+    /* Animations */
+    --flicker-duration: 0.1s;
+    --glitch-duration: 0.3s;
+    --fade-duration: 0.5s;
+  }
+
+  /* Upside Down Mode */
+  [data-theme="upside-down"] {
+    --background: 0 0% 3%;      /* Darker background */
+    --foreground: 349 100% 80%; /* Red-tinted text */
+    
+    --card: 0 0% 5%;
+    --card-foreground: 349 100% 80%;
+    
+    --primary: 0 100% 70%;      /* Bright red */
+    --primary-foreground: 0 0% 10%;
+    
+    --accent: 349 100% 50%;
+    --accent-foreground: 0 0% 10%;
+    
+    --border: 349 50% 15%;
+    
+    /* Upside Down specific effects */
+    filter: invert(0.05) hue-rotate(180deg) contrast(1.2);
+  }
+}
+
+/* Typography */
+@layer base {
+  .font-stranger {
+    font-family: 'Creepster', cursive;
+  }
+  
+  .font-retro {
+    font-family: 'Orbitron', monospace;
+  }
+  
+  .font-pixel {
+    font-family: 'Press Start 2P', monospace;
+  }
+}
+
+/* Stranger Things Effects */
+@layer utilities {
+  .glow-red {
+    text-shadow: var(--red-glow);
+  }
+  
+  .glow-blue {
+    text-shadow: var(--blue-glow);
+  }
+  
+  /* Authentic Stranger Things neon text effect */
+  .stranger-neon {
+    color: #ff0000;
+    text-shadow: var(--stranger-text-shadow);
+    font-weight: bold;
+    letter-spacing: 0.1em;
+  }
+  
+  .stranger-glow {
+    text-shadow: var(--stranger-glow);
+  }
+  
+  /* Enhanced neon effect for titles */
+  .neon-title {
+    color: #ff0000;
+    text-shadow: 
+      0 0 5px #ff0000,
+      0 0 10px #ff0000,
+      0 0 20px #ff0000,
+      0 0 40px #ff0000,
+      0 0 80px #ff0000,
+      0 0 120px #ff0000;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  
+  .flicker {
+    animation: flicker var(--flicker-duration) infinite alternate;
+  }
+  
+  .glitch {
+    animation: glitch var(--glitch-duration) infinite;
+  }
+  
+  .upside-down-text {
+    transform: rotateY(180deg);
+  }
+  
+  .vhs-overlay {
+    position: relative;
+  }
+  
+  .vhs-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.03) 2px,
+      rgba(255, 255, 255, 0.03) 4px
+    );
+    pointer-events: none;
+  }
+}
+
+/* Keyframes */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-red {
+  0%, 100% { 
+    box-shadow: 0 0 5px hsl(var(--upside-down-red)), 
+                0 0 10px hsl(var(--upside-down-red)),
+                0 0 15px hsl(var(--upside-down-red));
+  }
+  50% { 
+    box-shadow: 0 0 10px hsl(var(--upside-down-red)), 
+                0 0 20px hsl(var(--upside-down-red)),
+                0 0 30px hsl(var(--upside-down-red));
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
